@@ -1,0 +1,16 @@
+Idee präzisieren{
+	auf Zeit wie Warstride gegner töten
+	nicht so heavy parkour sondern arena
+	durch movement in arena nicht sterben
+	wall slide?
+}
+health und shield in arena veteilt oder spawnen
+demon sword als heavy attack lang cd oder ult-meter
+demon chain zum ranziehen mit frühem release
+nahkampf angriff
+gegner 2d billboard sprites
+standard attack mit lm wenig schaden
+upward dash mit demon wings rm
+wenn ein gegner low ist mit magic tentakel spell (cult of the lamp like) essen und heilen, targets marken
+bischen doom feeling aber reversed
+bischen warstride challenges feeling

@@ -22,7 +22,6 @@ var health = 0
 
 
 func _ready():
-	
 	change_camera_fov(110)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	MainCameraPivot.global_transform = PlayerBody.global_transform
