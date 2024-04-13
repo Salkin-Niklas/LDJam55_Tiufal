@@ -1,0 +1,132 @@
+[gd_scene load_steps=14 format=3 uid="uid://digjsy3ikmea6"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_uskka"]
+[ext_resource type="Script" path="res://Player.gd" id="2_dweeq"]
+[ext_resource type="Script" path="res://CharacterBody_player.gd" id="3_y82wd"]
+[ext_resource type="Script" path="res://Healthbar.gd" id="4_rt6ft"]
+[ext_resource type="PrismMesh" uid="uid://bcberldsqek4f" path="res://stairs1.tres" id="4_wglta"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sawlw"]
+bg_color = Color(0.490196, 0.294118, 0.419608, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.694118, 0.764706, 1, 1)
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixlpq"]
+bg_color = Color(0.729412, 0, 0.294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.694118, 0.764706, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n8lu1"]
+radius = 1.0
+height = 3.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s2pbs"]
+radius = 1.0
+height = 3.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlsl0"]
+size = Vector3(100, 2, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iui3h"]
+size = Vector3(100, 2, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyufa"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_246j5"]
+data = PackedVector3Array(-2.5, 1, 0.75, 2.5, -1, 0.75, -2.5, -1, 0.75, -2.5, 1, -0.75, -2.5, -1, -0.75, 2.5, -1, -0.75, -2.5, 1, 0.75, -2.5, 1, -0.75, 2.5, -1, 0.75, -2.5, 1, -0.75, 2.5, -1, -0.75, 2.5, -1, 0.75, -2.5, 1, -0.75, -2.5, 1, 0.75, -2.5, -1, -0.75, -2.5, 1, 0.75, -2.5, -1, 0.75, -2.5, -1, -0.75, -2.5, -1, 0.75, 2.5, -1, 0.75, -2.5, -1, -0.75, 2.5, -1, 0.75, 2.5, -1, -0.75, -2.5, -1, -0.75)
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_uskka")
+
+[node name="Interface" type="Node" parent="."]
+
+[node name="Healthbar" type="Control" parent="Interface"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_rt6ft")
+
+[node name="Healthbar" type="ProgressBar" parent="Interface/Healthbar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -13.5
+offset_right = 132.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_sawlw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ixlpq")
+show_percentage = false
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_dweeq")
+
+[node name="Camera_pivot" type="Node3D" parent="Player"]
+
+[node name="Camera_FP" type="Camera3D" parent="Player/Camera_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2.5, 0)
+
+[node name="CharacterBody_player" type="CharacterBody3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+script = ExtResource("3_y82wd")
+
+[node name="Mesh_player" type="MeshInstance3D" parent="Player/CharacterBody_player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_n8lu1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody_player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_s2pbs")
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Ground" type="Node3D" parent="Map"]
+
+[node name="static_floor" type="StaticBody3D" parent="Map/Ground"]
+collision_priority = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Ground/static_floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_hlsl0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Ground/static_floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0587294, -1, 0)
+mesh = SubResource("BoxMesh_iui3h")
+skeleton = NodePath("../..")
+
+[node name="Stairs" type="Node3D" parent="Map"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Stairs"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Stairs/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962177, 0)
+mesh = ExtResource("4_wglta")
+surface_material_override/0 = SubResource("StandardMaterial3D_tyufa")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Map/Stairs/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962177, 0)
+shape = SubResource("ConcavePolygonShape3D_246j5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8574, 30.3508, -15.591)
