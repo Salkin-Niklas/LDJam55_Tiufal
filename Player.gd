@@ -10,7 +10,9 @@ signal maxhealth_changed(val)
 enum STATES{
 	WALKING,
 	FLYING,
+	WALL,
 	DEAD,
+	STUNNED,
 	DEFAULT
 }
 var state = STATES.WALKING

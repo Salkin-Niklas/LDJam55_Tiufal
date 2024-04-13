@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://digjsy3ikmea6"]
+[gd_scene load_steps=18 format=3 uid="uid://digjsy3ikmea6"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_uskka"]
 [ext_resource type="Script" path="res://Player.gd" id="2_dweeq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Enemies.gd" id="4_2ny52"]
 [ext_resource type="Script" path="res://Healthbar.gd" id="4_rt6ft"]
 [ext_resource type="PrismMesh" uid="uid://bcberldsqek4f" path="res://stairs1.tres" id="4_wglta"]
+[ext_resource type="Script" path="res://CharacterBody_enemy.gd" id="5_wla0m"]
 [ext_resource type="Script" path="res://Label_FPS.gd" id="6_2yjxy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_n8lu1"]
@@ -16,17 +17,22 @@ height = 3.0
 radius = 1.0
 height = 3.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hlsl0"]
-size = Vector3(100, 2, 100)
-
-[sub_resource type="BoxMesh" id="BoxMesh_iui3h"]
-size = Vector3(100, 2, 100)
+[sub_resource type="NavigationMesh" id="NavigationMesh_s5f81"]
+vertices = PackedVector3Array(-49.5587, 0.5, 0, -3.05873, 0.5, 0, -2.80873, 0.5, -1.25, -1.55873, 0.5, -49.5, -49.5587, 0.5, -49.5, -2.80873, 0.5, -1.25, -1.30873, 0.5, -1.25, -1.55873, 0.5, -49.5, -1.30873, 0.5, -1.25, -0.0587311, 0.5, -1.25, 0.191269, 0.5, -49.5, -1.55873, 0.5, -49.5, 0.191269, 0.5, -49.5, -0.0587311, 0.5, -1.25, 1.44127, 0.5, -1, 49.4413, 0.5, -1, 49.4413, 0.5, -49.5, 1.44127, 0.75, -0.25, -2.05873, 2.25, -0.25, -2.05873, 2.25, 0.5, 1.44127, 0.75, 0.5, 49.4413, 0.5, 1.25, 49.4413, 0.5, -1, 1.44127, 0.75, -0.25, 1.44127, 0.75, 0.5, 49.4413, 0.5, -1, 1.44127, 0.5, -1, 1.44127, 0.75, -0.25, 1.44127, 0.75, 0.5, 1.44127, 0.5, 1.25, 49.4413, 0.5, 1.25, -2.80873, 0.5, 1.5, -3.05873, 0.5, 0, -49.5587, 0.5, 0, -49.5587, 0.5, 49.5, -0.558731, 0.5, 49.5, -0.558731, 0.5, 49.5, -0.558731, 0.5, 1.5, -2.80873, 0.5, 1.5, 1.44127, 0.5, 1.25, -0.558731, 0.5, 1.5, -0.558731, 0.5, 49.5, 49.4413, 0.5, 49.5, 49.4413, 0.5, 1.25)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(7, 6, 5), PackedInt32Array(8, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 16), PackedInt32Array(20, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(24, 23, 21), PackedInt32Array(21, 23, 22), PackedInt32Array(27, 26, 25), PackedInt32Array(30, 29, 28), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 34), PackedInt32Array(34, 31, 35), PackedInt32Array(38, 37, 36), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 43), PackedInt32Array(41, 43, 42)]
+agent_height = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyufa"]
 vertex_color_use_as_albedo = true
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_246j5"]
 data = PackedVector3Array(-2.5, 1, 0.75, 2.5, -1, 0.75, -2.5, -1, 0.75, -2.5, 1, -0.75, -2.5, -1, -0.75, 2.5, -1, -0.75, -2.5, 1, 0.75, -2.5, 1, -0.75, 2.5, -1, 0.75, -2.5, 1, -0.75, 2.5, -1, -0.75, 2.5, -1, 0.75, -2.5, 1, -0.75, -2.5, 1, 0.75, -2.5, -1, -0.75, -2.5, 1, 0.75, -2.5, -1, 0.75, -2.5, -1, -0.75, -2.5, -1, 0.75, 2.5, -1, 0.75, -2.5, -1, -0.75, 2.5, -1, 0.75, 2.5, -1, -0.75, -2.5, -1, -0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlsl0"]
+size = Vector3(100, 2, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iui3h"]
+size = Vector3(100, 2, 100)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sawlw"]
 bg_color = Color(0.490196, 0.294118, 0.419608, 1)
@@ -68,50 +74,57 @@ mesh = SubResource("CapsuleMesh_n8lu1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_s2pbs")
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Enemies" type="Node" parent="." groups=["enemies"]]
 script = ExtResource("4_2ny52")
 
-[node name="CharacterBody_archer" type="CharacterBody3D" parent="Enemies"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
-script = ExtResource("3_y82wd")
+[node name="CharacterBody_enemy" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6216, 3.21981, 6.27504)
+script = ExtResource("5_wla0m")
 
-[node name="Mesh_player" type="MeshInstance3D" parent="Enemies/CharacterBody_archer"]
+[node name="Mesh_enemy" type="MeshInstance3D" parent="Enemies/CharacterBody_enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_n8lu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/CharacterBody_archer"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/CharacterBody_enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_s2pbs")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/CharacterBody_enemy"]
+debug_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
 [node name="Map" type="Node" parent="."]
 
-[node name="Ground" type="Node3D" parent="Map"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Map"]
+navigation_mesh = SubResource("NavigationMesh_s5f81")
 
-[node name="static_floor" type="StaticBody3D" parent="Map/Ground"]
-collision_priority = 2.0
+[node name="Stairs" type="Node3D" parent="Map/NavigationRegion3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Ground/static_floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_hlsl0")
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/NavigationRegion3D/Stairs"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Ground/static_floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0587294, -1, 0)
-mesh = SubResource("BoxMesh_iui3h")
-skeleton = NodePath("../..")
-
-[node name="Stairs" type="Node3D" parent="Map"]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/Stairs"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Stairs/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/NavigationRegion3D/Stairs/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962177, 0)
 mesh = ExtResource("4_wglta")
 surface_material_override/0 = SubResource("StandardMaterial3D_tyufa")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Map/Stairs/StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Map/NavigationRegion3D/Stairs/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962177, 0)
 shape = SubResource("ConcavePolygonShape3D_246j5")
+
+[node name="Ground" type="Node3D" parent="Map/NavigationRegion3D"]
+
+[node name="static_floor" type="StaticBody3D" parent="Map/NavigationRegion3D/Ground"]
+collision_priority = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/NavigationRegion3D/Ground/static_floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_hlsl0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/NavigationRegion3D/Ground/static_floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0587294, -1, 0)
+mesh = SubResource("BoxMesh_iui3h")
+skeleton = NodePath("../..")
 
 [node name="Interface" type="Node" parent="."]
 
