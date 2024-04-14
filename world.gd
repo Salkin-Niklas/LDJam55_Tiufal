@@ -14,5 +14,6 @@ func _ready():
 
 func _process(delta):
 	get_tree().call_group("enemies","update_target_pos",Player.PlayerBody.global_transform.origin)
+	get_tree().call_group("enemies","update_target_vel",Player.PlayerBody.velocity)
 	if Input.is_key_pressed(KEY_BACKSPACE):
 		change_health.emit(-1)

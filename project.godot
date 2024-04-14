@@ -24,6 +24,9 @@ animation_library={
 [layer_names]
 
 3d_physics/layer_1="Environment"
+3d_physics/layer_2="Entities"
+3d_physics/layer_3="Spells_player"
+3d_physics/layer_4="Spells_enemy"
 
 [rendering]
 

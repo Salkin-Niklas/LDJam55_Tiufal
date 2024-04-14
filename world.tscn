@@ -1,13 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://digjsy3ikmea6"]
+[gd_scene load_steps=25 format=3 uid="uid://digjsy3ikmea6"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_uskka"]
 [ext_resource type="Script" path="res://Player.gd" id="2_dweeq"]
 [ext_resource type="Script" path="res://CharacterBody_player.gd" id="3_y82wd"]
-[ext_resource type="Script" path="res://Enemies.gd" id="4_2ny52"]
 [ext_resource type="Script" path="res://Healthbar.gd" id="4_rt6ft"]
 [ext_resource type="PrismMesh" uid="uid://bcberldsqek4f" path="res://stairs1.tres" id="4_wglta"]
 [ext_resource type="Script" path="res://CharacterBody_enemy.gd" id="5_wla0m"]
 [ext_resource type="Script" path="res://Label_FPS.gd" id="6_2yjxy"]
+[ext_resource type="Shape3D" uid="uid://0t5f3d2dng7a" path="res://collision_standard.tres" id="7_i2qqr"]
+[ext_resource type="Texture2D" uid="uid://cs3hftxwr2lkn" path="res://player_down_0.png" id="7_y5j1r"]
+[ext_resource type="Script" path="res://Pfeil.gd" id="8_5ubly"]
+[ext_resource type="Script" path="res://Archer.gd" id="8_d1xfq"]
+[ext_resource type="Texture2D" uid="uid://bgdyeqfgigmmo" path="res://arrow_up.png" id="9_883ee"]
+[ext_resource type="Script" path="res://Brawler.gd" id="9_e46km"]
+[ext_resource type="Script" path="res://Mage.gd" id="10_ljkvt"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_n8lu1"]
 radius = 1.0
@@ -16,6 +22,9 @@ height = 3.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s2pbs"]
 radius = 1.0
 height = 3.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvtrd"]
+size = Vector3(1, 0.25, 0.25)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_s5f81"]
 vertices = PackedVector3Array(-49.5587, 0.5, 0, -3.05873, 0.5, 0, -2.80873, 0.5, -1.25, -1.55873, 0.5, -49.5, -49.5587, 0.5, -49.5, -2.80873, 0.5, -1.25, -1.30873, 0.5, -1.25, -1.55873, 0.5, -49.5, -1.30873, 0.5, -1.25, -0.0587311, 0.5, -1.25, 0.191269, 0.5, -49.5, -1.55873, 0.5, -49.5, 0.191269, 0.5, -49.5, -0.0587311, 0.5, -1.25, 1.44127, 0.5, -1, 49.4413, 0.5, -1, 49.4413, 0.5, -49.5, 1.44127, 0.75, -0.25, -2.05873, 2.25, -0.25, -2.05873, 2.25, 0.5, 1.44127, 0.75, 0.5, 49.4413, 0.5, 1.25, 49.4413, 0.5, -1, 1.44127, 0.75, -0.25, 1.44127, 0.75, 0.5, 49.4413, 0.5, -1, 1.44127, 0.5, -1, 1.44127, 0.75, -0.25, 1.44127, 0.75, 0.5, 1.44127, 0.5, 1.25, 49.4413, 0.5, 1.25, -2.80873, 0.5, 1.5, -3.05873, 0.5, 0, -49.5587, 0.5, 0, -49.5587, 0.5, 49.5, -0.558731, 0.5, 49.5, -0.558731, 0.5, 49.5, -0.558731, 0.5, 1.5, -2.80873, 0.5, 1.5, 1.44127, 0.5, 1.25, -0.558731, 0.5, 1.5, -0.558731, 0.5, 49.5, 49.4413, 0.5, 49.5, 49.4413, 0.5, 1.25)
@@ -63,6 +72,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2.5, 0)
 
 [node name="CharacterBody_player" type="CharacterBody3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+collision_layer = 15
+collision_mask = 11
 script = ExtResource("3_y82wd")
 
 [node name="Mesh_player" type="MeshInstance3D" parent="Player/CharacterBody_player"]
@@ -74,23 +85,111 @@ mesh = SubResource("CapsuleMesh_n8lu1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_s2pbs")
 
-[node name="Enemies" type="Node" parent="." groups=["enemies"]]
-script = ExtResource("4_2ny52")
+[node name="Enemies" type="Node" parent="."]
 
 [node name="CharacterBody_enemy" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6216, 3.21981, 6.27504)
+collision_layer = 15
+collision_mask = 7
 script = ExtResource("5_wla0m")
-
-[node name="Mesh_enemy" type="MeshInstance3D" parent="Enemies/CharacterBody_enemy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-mesh = SubResource("CapsuleMesh_n8lu1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/CharacterBody_enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-shape = SubResource("CapsuleShape3D_s2pbs")
+shape = ExtResource("7_i2qqr")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/CharacterBody_enemy"]
 debug_enabled = true
+
+[node name="Sprite3d" type="Sprite3D" parent="Enemies/CharacterBody_enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60768, 0)
+pixel_size = 0.2
+billboard = 2
+texture = ExtResource("7_y5j1r")
+
+[node name="AttackCD" type="Timer" parent="Enemies/CharacterBody_enemy"]
+
+[node name="AbilityCD" type="Timer" parent="Enemies/CharacterBody_enemy"]
+
+[node name="Stun" type="Timer" parent="Enemies/CharacterBody_enemy"]
+
+[node name="Archer" type="CharacterBody3D" parent="Enemies"]
+script = ExtResource("8_d1xfq")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/Archer"]
+debug_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Archer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = ExtResource("7_i2qqr")
+
+[node name="Sprite3d" type="Sprite3D" parent="Enemies/Archer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60768, 0)
+pixel_size = 0.2
+billboard = 2
+texture = ExtResource("7_y5j1r")
+
+[node name="AttackCD" type="Timer" parent="Enemies/Archer"]
+
+[node name="AbilityCD" type="Timer" parent="Enemies/Archer"]
+
+[node name="Stun" type="Timer" parent="Enemies/Archer"]
+
+[node name="Pfeil" type="Area3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16521, 9.09119)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("8_5ubly")
+
+[node name="Sprite3D" type="Sprite3D" parent="Enemies/Pfeil"]
+transform = Transform3D(-1.74846e-07, 7, 0, -4, -3.0598e-07, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("9_883ee")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Pfeil"]
+shape = SubResource("BoxShape3D_mvtrd")
+
+[node name="Brawler" type="CharacterBody3D" parent="Enemies"]
+script = ExtResource("9_e46km")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/Brawler"]
+debug_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Brawler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = ExtResource("7_i2qqr")
+
+[node name="Sprite3d" type="Sprite3D" parent="Enemies/Brawler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60768, 0)
+pixel_size = 0.2
+billboard = 2
+texture = ExtResource("7_y5j1r")
+
+[node name="AttackCD" type="Timer" parent="Enemies/Brawler"]
+
+[node name="AbilityCD" type="Timer" parent="Enemies/Brawler"]
+
+[node name="Stun" type="Timer" parent="Enemies/Brawler"]
+
+[node name="Mage" type="CharacterBody3D" parent="Enemies"]
+script = ExtResource("10_ljkvt")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/Mage"]
+debug_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Mage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = ExtResource("7_i2qqr")
+
+[node name="Sprite3d" type="Sprite3D" parent="Enemies/Mage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60768, 0)
+pixel_size = 0.2
+billboard = 2
+texture = ExtResource("7_y5j1r")
+
+[node name="AttackCD" type="Timer" parent="Enemies/Mage"]
+
+[node name="AbilityCD" type="Timer" parent="Enemies/Mage"]
+
+[node name="Stun" type="Timer" parent="Enemies/Mage"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
@@ -167,3 +266,5 @@ script = ExtResource("6_2yjxy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8574, 30.3508, -15.591)
+
+[connection signal="body_entered" from="Enemies/Pfeil" to="Enemies/Pfeil" method="_on_body_entered"]

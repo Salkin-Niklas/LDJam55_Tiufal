@@ -4,6 +4,10 @@ Idee präzisieren{
 	durch movement in arena nicht sterben
 	wall slide?
 }
+aoe spell
+am Anfang gekettet mit count down
+kette aus einzelnen links als animation? oder links entlang einer funktion
+slomo
 health und shield in arena veteilt oder spawnen
 demon sword als heavy attack lang cd oder ult-meter
 demon chain zum ranziehen mit frühem release
@@ -14,3 +18,4 @@ upward dash mit demon wings rm
 wenn ein gegner low ist mit magic tentakel spell (cult of the lamp like) essen und heilen, targets marken
 bischen doom feeling aber reversed
 bischen warstride challenges feeling
+wenn tot super slowmo

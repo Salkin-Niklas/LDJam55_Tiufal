@@ -1,6 +1,21 @@
 extends CharacterBody3D
 
+class_name Enemy
+
 @onready var nav_agent = $NavigationAgent3D
+
+enum STATES{
+	WALKING,
+	DEAD,
+	ATTACK,
+	ABILITY,
+	STUNNED,
+	DEFAULT
+}
+var state = STATES.WALKING
+
+var MAX_HEALTH = 100
+var health = 0
 
 const SPEED = 5.0
 
@@ -18,6 +33,22 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func update_target_pos(target_pos):
-	print(target_pos)
-	nav_agent.target_position = target_pos
+func update_target_pos(pos):
+	nav_agent.target_position = pos
+
+func update_target_vel(vel):
+	pass
+
+func change_health(amount):
+	health += amount
+	if health <= 0:
+		state = STATES.DEAD
+		health = 0
+	if health > MAX_HEALTH:
+		health = MAX_HEALTH
+
+func ability():
+	pass
+
+func attack():
+	pass
