@@ -7,6 +7,7 @@ extends Node
 @onready var magicshot_timer = $MagicShot_Timer
 @onready var chain_timer = $Chain_Timer
 @onready var stun_timer = $Stun_Timer
+@onready var slide_timer = $Slide_Timer
 
 signal health_changed(val)
 signal maxhealth_changed(val)
