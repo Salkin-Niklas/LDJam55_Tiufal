@@ -19,3 +19,9 @@ wenn ein gegner low ist mit magic tentakel spell (cult of the lamp like) essen u
 bischen doom feeling aber reversed
 bischen warstride challenges feeling
 wenn tot super slowmo
+
+Movement:
+	Momentum wird auf dem Boden langsam gekillt außer man drückt SHIFT, dann länger erhalten
+	wenn SHIFT released Momentum in Camera Richtung gedreht + dash, umso mehr drehung weniger momentum
+	wenn SHIFT pressed richtung merken und solange pressed wenn W gedrückt, schnell speed aufbauen, andere inputs nur minimal
+	
