@@ -40,6 +40,7 @@ func attack():
 		#arrow.global_rotation.x =  -Vector3(0,arrow.dir.y,0).signed_angle_to(Vector3(1,0,0),Vector3(0,0,1))
 		#attack_timer.start(ATTACK_CD)
 		
+		target_vel.y = 0
 		var arrow = preload("res://arrow.tscn").instantiate()
 		get_parent().add_child(arrow,true)
 		var shoot_origin =  global_position + Vector3(0,1.5,0)

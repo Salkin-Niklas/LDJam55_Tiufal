@@ -5,7 +5,7 @@ var PlayerRotation = Vector2(0,0)
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const SPRINT_SPEED = 4.0
-const WALLSLIDE_SPEED = 2.0
+const WALLSLIDE_SPEED = 4.0
 var max_speed = 0
 var slide_dir = Vector3(0,0,0)
 
@@ -21,19 +21,18 @@ func _physics_process(delta):
 	if velocity.length() > 100:
 		velocity = Vector3(0,0,0)
 
+	# Add the gravity.
+	if not is_on_floor() and not (is_on_wall() and Input.is_key_pressed(KEY_SHIFT)):
+		velocity.y -= gravity * delta
+	else:
+		var cam_tilt = (-get_parent().MainCamera.get_global_transform().basis.z).y
+		velocity.y += cam_tilt*delta*1.2
+
 	if get_parent().state == get_parent().STATES.DEAD:
 		velocity.x *= 0.5
 		velocity.z *= 0.5
 		move_and_slide()
 		return
-
-	# Add the gravity.
-	if not is_on_floor() and not (is_on_wall() and Input.is_key_pressed(KEY_SHIFT)):
-		velocity.y -= gravity * delta
-	else:
-		var slide_dir = -get_parent().MainCamera.get_global_transform().basis.z
-		velocity.y += slide_dir.y*delta*1
-		print(slide_dir.y)
 
 	if Input.is_key_pressed(KEY_SHIFT):
 		max_speed = SPEED
@@ -55,7 +54,7 @@ func _physics_process(delta):
 			velocity.z = move_toward(velocity.z, slide_dir.z * max_speed, 0.1) # delta anpassen
 	
 	else:
-		if Input.is_action_just_released("SHIFT") and is_on_floor():
+		if Input.is_action_just_released("SHIFT") and (is_on_floor() or is_on_wall()):
 			if get_parent().slide_timer.time_left == 0:
 				var dash_dir =  -get_parent().MainCamera.get_global_transform().basis.z
 				velocity = dash_dir*2*velocity.length()*(200-rad_to_deg(dash_dir.angle_to(velocity)))/180
@@ -78,15 +77,9 @@ func _physics_process(delta):
 				velocity.x = move_toward(velocity.x, 0, 0.1)
 				velocity.z = move_toward(velocity.z, 0, 0.1)
 
-
-
-
 	# Handle jump.
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y += JUMP_VELOCITY
-
-
-	#seitwärts movement langsamer?
 	
-	print(velocity.length())
+	#print(velocity.length())
 	move_and_slide()
