@@ -27,6 +27,7 @@ animation_library={
 3d_physics/layer_2="Entities"
 3d_physics/layer_3="Spells_player"
 3d_physics/layer_4="Spells_enemy"
+3d_physics/layer_5="Environment kills spells"
 
 [rendering]
 

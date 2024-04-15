@@ -1,16 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://digjsy3ikmea6"]
+[gd_scene load_steps=22 format=3 uid="uid://digjsy3ikmea6"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_uskka"]
 [ext_resource type="Script" path="res://Player.gd" id="2_dweeq"]
-[ext_resource type="Script" path="res://CharacterBody_player.gd" id="3_y82wd"]
+[ext_resource type="Script" path="res://PlayerBody.gd" id="3_y82wd"]
 [ext_resource type="Script" path="res://Healthbar.gd" id="4_rt6ft"]
 [ext_resource type="PrismMesh" uid="uid://bcberldsqek4f" path="res://stairs1.tres" id="4_wglta"]
-[ext_resource type="Script" path="res://CharacterBody_enemy.gd" id="5_wla0m"]
+[ext_resource type="Script" path="res://EnemyBody.gd" id="5_wla0m"]
 [ext_resource type="Script" path="res://Label_FPS.gd" id="6_2yjxy"]
 [ext_resource type="Shape3D" uid="uid://0t5f3d2dng7a" path="res://collision_standard.tres" id="7_i2qqr"]
 [ext_resource type="Texture2D" uid="uid://cs3hftxwr2lkn" path="res://player_down_0.png" id="7_y5j1r"]
 [ext_resource type="Script" path="res://Archer.gd" id="8_d1xfq"]
-[ext_resource type="PackedScene" uid="uid://dr1xluiimhioc" path="res://arrow.tscn" id="8_tkh8c"]
 [ext_resource type="Script" path="res://Brawler.gd" id="9_e46km"]
 [ext_resource type="Script" path="res://Mage.gd" id="10_ljkvt"]
 
@@ -66,49 +65,61 @@ script = ExtResource("2_dweeq")
 [node name="Camera_FP" type="Camera3D" parent="Player/Camera_pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
-[node name="CharacterBody_player" type="CharacterBody3D" parent="Player"]
+[node name="PlayerBody" type="CharacterBody3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
-collision_layer = 15
+collision_layer = 11
 collision_mask = 11
 script = ExtResource("3_y82wd")
 
-[node name="Mesh_player" type="MeshInstance3D" parent="Player/CharacterBody_player"]
+[node name="Mesh_player" type="MeshInstance3D" parent="Player/PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_n8lu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody_player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_s2pbs")
 
+[node name="MagicShot_Timer" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="Chain_Timer" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="Leap_Timer" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="Stun_Timer" type="Timer" parent="Player"]
+one_shot = true
+
 [node name="Enemies" type="Node" parent="."]
 
-[node name="CharacterBody_enemy" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
+[node name="EnemyBody" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6216, 3.21981, 6.27504)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("5_wla0m")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/CharacterBody_enemy"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/EnemyBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = ExtResource("7_i2qqr")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/CharacterBody_enemy"]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/EnemyBody"]
 debug_enabled = true
 
-[node name="Sprite3d" type="Sprite3D" parent="Enemies/CharacterBody_enemy"]
+[node name="Sprite3d" type="Sprite3D" parent="Enemies/EnemyBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60768, 0)
 pixel_size = 0.2
 billboard = 2
 texture = ExtResource("7_y5j1r")
 
-[node name="Attack_Timer" type="Timer" parent="Enemies/CharacterBody_enemy"]
+[node name="Attack_Timer" type="Timer" parent="Enemies/EnemyBody"]
 one_shot = true
 
-[node name="Ability_Timer" type="Timer" parent="Enemies/CharacterBody_enemy"]
+[node name="Ability_Timer" type="Timer" parent="Enemies/EnemyBody"]
 one_shot = true
 
-[node name="Stun_Timer" type="Timer" parent="Enemies/CharacterBody_enemy"]
+[node name="Stun_Timer" type="Timer" parent="Enemies/EnemyBody"]
 one_shot = true
 
 [node name="Archer" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
@@ -138,8 +149,6 @@ one_shot = true
 
 [node name="Stun_Timer" type="Timer" parent="Enemies/Archer"]
 one_shot = true
-
-[node name="Pfeil" parent="Enemies" instance=ExtResource("8_tkh8c")]
 
 [node name="Brawler" type="CharacterBody3D" parent="Enemies"]
 script = ExtResource("9_e46km")
@@ -201,6 +210,8 @@ navigation_mesh = SubResource("NavigationMesh_s5f81")
 [node name="Stairs" type="Node3D" parent="Map/NavigationRegion3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map/NavigationRegion3D/Stairs"]
+collision_layer = 17
+collision_mask = 17
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map/NavigationRegion3D/Stairs/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962177, 0)
@@ -214,6 +225,8 @@ shape = SubResource("ConcavePolygonShape3D_246j5")
 [node name="Ground" type="Node3D" parent="Map/NavigationRegion3D"]
 
 [node name="static_floor" type="StaticBody3D" parent="Map/NavigationRegion3D/Ground"]
+collision_layer = 17
+collision_mask = 17
 collision_priority = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/NavigationRegion3D/Ground/static_floor"]

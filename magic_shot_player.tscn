@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca1qrma56rxwa"]
+
+[ext_resource type="Script" path="res://magic_shot_player.gd" id="1_g41sm"]
+[ext_resource type="Texture2D" uid="uid://cyyxm0saetw0t" path="res://magic_shot_player.png" id="2_hvse5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0hrb0"]
+radius = 0.3
+
+[node name="magic_shot" type="Area3D"]
+collision_layer = 20
+collision_mask = 20
+script = ExtResource("1_g41sm")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource("2_hvse5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0hrb0")
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

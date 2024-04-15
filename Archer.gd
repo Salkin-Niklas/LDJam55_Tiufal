@@ -13,6 +13,9 @@ func _physics_process(delta):
 	pass
 
 func _process(delta):
+	if health == 0:
+		queue_free()
+		return
 	attack()
 
 func update_target_pos(pos):

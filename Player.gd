@@ -1,8 +1,12 @@
 extends Node
 
 @onready var MainCamera = $Camera_pivot/Camera_FP
-@onready var PlayerBody = $CharacterBody_player
+@onready var PlayerBody = $PlayerBody
 @onready var MainCameraPivot = $Camera_pivot
+
+@onready var magicshot_timer = $MagicShot_Timer
+@onready var chain_timer = $Chain_Timer
+@onready var stun_timer = $Stun_Timer
 
 signal health_changed(val)
 signal maxhealth_changed(val)
@@ -21,6 +25,10 @@ const MOUSE_SENSE = 0.001
 
 var MAX_HEALTH = 100
 var health = 0
+
+const magicshot_cd = 0.2
+const chain_cd = 2
+const leap_cd = 5
 
 
 func _ready():
@@ -48,7 +56,6 @@ func rotate_player(Movement: Vector2):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#print($CharacterBody_player.global_transform)
 	MainCameraPivot.global_transform = PlayerBody.global_transform
 	if Input.is_key_pressed(KEY_F1):
 		change_camera_fov(90)
@@ -59,7 +66,9 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_F3):
 		change_camera_fov(MainCamera.fov+1)
 		print(MainCamera.fov)
-	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		shoot_magic_shot()
+
 
 func change_camera_fov(fov):
 	MainCamera.set_perspective(clamp(fov,60,120),0.05,4000)
@@ -72,3 +81,13 @@ func change_health(amount):
 	if health > MAX_HEALTH:
 		health = MAX_HEALTH
 	health_changed.emit(health)
+
+func shoot_magic_shot():
+	if magicshot_timer.time_left != 0:
+		return
+	var shot = preload("res://magic_shot_player.tscn").instantiate()
+	get_parent().add_child(shot,true)
+	var shoot_origin =  PlayerBody.global_position + Vector3(0,2.5,0)
+	shot.global_transform.origin = shoot_origin
+	shot.dir = -MainCamera.get_global_transform().basis.z
+	magicshot_timer.start(magicshot_cd)
