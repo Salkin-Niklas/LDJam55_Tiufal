@@ -3,6 +3,9 @@ extends CharacterBody3D
 class_name Enemy
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var attack_timer = $Attack_Timer
+@onready var ability_timer = $Ability_Timer
+@onready var stun_timer = $Stun_Timer
 
 enum STATES{
 	WALKING,
@@ -17,7 +20,10 @@ var state = STATES.WALKING
 var MAX_HEALTH = 100
 var health = 0
 
-const SPEED = 5.0
+var  SPEED = 5.0
+var ATTACK_CD = 0
+var ABILITY_CD = 0
+
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 

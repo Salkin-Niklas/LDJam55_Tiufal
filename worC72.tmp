@@ -64,7 +64,7 @@ script = ExtResource("2_dweeq")
 [node name="Camera_pivot" type="Node3D" parent="Player"]
 
 [node name="Camera_FP" type="Camera3D" parent="Player/Camera_pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2.5, 0)
 
 [node name="CharacterBody_player" type="CharacterBody3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
@@ -103,18 +103,13 @@ billboard = 2
 texture = ExtResource("7_y5j1r")
 
 [node name="Attack_Timer" type="Timer" parent="Enemies/CharacterBody_enemy"]
-one_shot = true
 
 [node name="Ability_Timer" type="Timer" parent="Enemies/CharacterBody_enemy"]
-one_shot = true
 
 [node name="Stun_Timer" type="Timer" parent="Enemies/CharacterBody_enemy"]
-one_shot = true
 
 [node name="Archer" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9918, 0, 14.0919)
-collision_layer = 7
-collision_mask = 7
 script = ExtResource("8_d1xfq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/Archer"]
@@ -131,13 +126,10 @@ billboard = 2
 texture = ExtResource("7_y5j1r")
 
 [node name="Attack_Timer" type="Timer" parent="Enemies/Archer"]
-one_shot = true
 
 [node name="Ability_Timer" type="Timer" parent="Enemies/Archer"]
-one_shot = true
 
 [node name="Stun_Timer" type="Timer" parent="Enemies/Archer"]
-one_shot = true
 
 [node name="Pfeil" parent="Enemies" instance=ExtResource("8_tkh8c")]
 
@@ -158,13 +150,10 @@ billboard = 2
 texture = ExtResource("7_y5j1r")
 
 [node name="Attack_Timer" type="Timer" parent="Enemies/Brawler"]
-one_shot = true
 
 [node name="Ability_Timer" type="Timer" parent="Enemies/Brawler"]
-one_shot = true
 
 [node name="Stun_Timer" type="Timer" parent="Enemies/Brawler"]
-one_shot = true
 
 [node name="Mage" type="CharacterBody3D" parent="Enemies"]
 script = ExtResource("10_ljkvt")
@@ -183,13 +172,10 @@ billboard = 2
 texture = ExtResource("7_y5j1r")
 
 [node name="Attack_Timer" type="Timer" parent="Enemies/Mage"]
-one_shot = true
 
 [node name="Ability_Timer" type="Timer" parent="Enemies/Mage"]
-one_shot = true
 
 [node name="Stun_Timer" type="Timer" parent="Enemies/Mage"]
-one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 

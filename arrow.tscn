@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr1xluiimhioc"]
+
+[ext_resource type="Script" path="res://Pfeil.gd" id="1_ddny1"]
+[ext_resource type="Texture2D" uid="uid://bgdyeqfgigmmo" path="res://arrow_up.png" id="2_nl3jx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvtrd"]
+size = Vector3(1, 0.25, 0.25)
+
+[node name="Pfeil" type="Area3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_ddny1")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-1.74846e-07, 7, 0, -4, -3.0598e-07, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("2_nl3jx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mvtrd")
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
