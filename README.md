@@ -8,6 +8,6 @@ Graphics are just placeholders.
 I´ll continue to work on the game, maybe it will be fleshed out someday.
 
 # Tiufal
-This game was created for [Ludum Dare Game Jam](https://ldjam.com) 55 with the theme of Summoning. In this game you play a little demon who got caught by humans. In a spectacle for the masses your head is on the chopping block. Using your demonic powers you summon black magic to free yourself and punish your abductors. Tiufal is about movement inspired by Warstride Challenges and is stylistic based on Doom64.
+This game was created for [Ludum Dare Game Jam](https://ldjam.com) 55 with the theme of Summoning. In this game you play a little demon who got caught by humans. In a spectacle for the masses your head is on the chopping block. Using your demonic powers you summon black magic to free yourself and punish your abductors. Tiufal is about movement inspired by Warstride Challenges and is stylistic based on Doom64. Kill everyone as fast as possible but be aware that they want you dead aswell.
 
 Play with mouse and keyboard.
