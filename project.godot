@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="LDJam55_Summoning"
+config/name="LDJam55_Tiufal"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=144
