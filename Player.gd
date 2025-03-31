@@ -9,8 +9,8 @@ extends Node
 @onready var stun_timer: Timer = $Stun_Timer
 @onready var slide_timer: Timer = $Slide_Timer
 
-signal health_changed(val)
-signal maxhealth_changed(val)
+signal health_changed(val: float)
+signal maxhealth_changed(val: float)
 
 enum STATES{
 	WALKING,
@@ -56,7 +56,7 @@ func rotate_player(Movement: Vector2):
 	MainCamera.rotate_object_local(Vector3(1,0,0),-PlayerBody.PlayerRotation.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float):
 	MainCameraPivot.global_transform = PlayerBody.global_transform
 	if Input.is_key_pressed(KEY_F1):
 		change_camera_fov(90)
@@ -71,7 +71,7 @@ func _process(delta):
 		shoot_magic_shot()
 
 
-func change_camera_fov(fov: int):
+func change_camera_fov(fov: float):
 	MainCamera.set_perspective(clamp(fov,60,120),0.05,4000)
 
 func change_health(amount: float):

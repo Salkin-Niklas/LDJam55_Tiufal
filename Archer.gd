@@ -9,10 +9,10 @@ func _ready():
 	health = 50
 	ATTACK_CD = 2
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	pass
 
-func _process(delta):
+func _process(delta: float):
 	if health == 0:
 		queue_free()
 		return

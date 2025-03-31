@@ -159,7 +159,7 @@ one_shot = true
 [node name="Stun_Timer" type="Timer" parent="Enemies/Archer"]
 one_shot = true
 
-[node name="Brawler" type="CharacterBody3D" parent="Enemies"]
+[node name="Brawler" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
 script = ExtResource("9_e46km")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/Brawler"]
@@ -184,7 +184,7 @@ one_shot = true
 [node name="Stun_Timer" type="Timer" parent="Enemies/Brawler"]
 one_shot = true
 
-[node name="Mage" type="CharacterBody3D" parent="Enemies"]
+[node name="Mage" type="CharacterBody3D" parent="Enemies" groups=["enemies"]]
 script = ExtResource("10_ljkvt")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemies/Mage"]

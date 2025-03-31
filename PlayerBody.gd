@@ -14,7 +14,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	pass
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if global_position.y < -10:
 		global_position = Vector3(0,0,0)
 		return
@@ -25,7 +25,7 @@ func _physics_process(delta):
 	if not is_on_floor() and not (is_on_wall() and Input.is_key_pressed(KEY_SHIFT)):
 		velocity.y -= gravity * delta
 	else:
-		var cam_tilt = (-get_parent().MainCamera.get_global_transform().basis.z).y
+		var cam_tilt: float = (-get_parent().MainCamera.get_global_transform().basis.z).y
 		velocity.y += cam_tilt*delta*1.2
 
 	if get_parent().state == get_parent().STATES.DEAD:
@@ -56,11 +56,11 @@ func _physics_process(delta):
 	else:
 		if Input.is_action_just_released("SHIFT") and (is_on_floor() or is_on_wall()):
 			if get_parent().slide_timer.time_left == 0:
-				var dash_dir =  -get_parent().MainCamera.get_global_transform().basis.z
+				var dash_dir: Vector3 =  -get_parent().MainCamera.get_global_transform().basis.z
 				velocity = dash_dir*2*velocity.length()*(200-rad_to_deg(dash_dir.angle_to(velocity)))/180
 		
 		else:
-			var input_dir = Vector3(0,0,0)
+			var input_dir := Vector3(0,0,0)
 			if Input.is_key_pressed(KEY_W):
 				input_dir.z += -1
 			if Input.is_key_pressed(KEY_A):
@@ -69,7 +69,7 @@ func _physics_process(delta):
 				input_dir.x += 1
 			if Input.is_key_pressed(KEY_S):
 				input_dir.z += 1
-			var direction = (transform.basis * input_dir.normalized()).normalized()
+			var direction: Vector3 = (transform.basis * input_dir.normalized()).normalized()
 			if direction:
 				velocity.x = move_toward(velocity.x, direction.x * SPEED, 0.1) # delta anpassen
 				velocity.z = move_toward(velocity.z, direction.z * SPEED, 0.1) # delta anpassen

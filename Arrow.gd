@@ -15,7 +15,7 @@ var dir := Vector3(0,0,0)
 func _ready():
 	lifetimer.start(LIFETIME)
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if lifetimer.time_left == 0:
 		queue_free()
 	if hit:
@@ -27,7 +27,6 @@ func _on_body_entered(body):
 		return
 	elif not (body.collision_layer & (1<<4)) and (body.collision_layer & IGNORE_LAYER):
 		if body.get_parent().has_method("change_health"):
-			print(DMG)
 			body.get_parent().change_health(-DMG)
 	hit = true
 	queue_free()

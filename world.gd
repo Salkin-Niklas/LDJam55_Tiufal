@@ -3,7 +3,7 @@ extends Node3D
 @onready var Player_lifebar: Control = $Interface/Healthbar
 @onready var Player: Node = $Player
 
-signal change_health(amount)
+signal change_health(amount: float)
 
 func _ready():
 	# Connect Signals
@@ -12,7 +12,7 @@ func _ready():
 	self.connect("change_health", Player.change_health)
 
 
-func _process(delta):
+func _process(delta: float):
 	get_tree().call_group("enemies","update_target_pos",Player.PlayerBody.global_transform.origin)
 	get_tree().call_group("enemies","update_target_vel",Player.PlayerBody.velocity)
 	if Input.is_key_pressed(KEY_BACKSPACE):

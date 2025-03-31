@@ -31,7 +31,7 @@ func _ready():
 	queue_free()
 
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 
 	var cur_pos: Vector3 = global_transform.origin
 	var nxt_pos: Vector3 = nav_agent.get_next_path_position()
