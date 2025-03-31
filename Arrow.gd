@@ -1,16 +1,16 @@
 extends Area3D
 
-@onready var sprite = $Sprite3D
-@onready var shape = $CollisionShape3D
-@onready var lifetimer = $Lifetime
-const IGNORE_LAYER = (1<<2) | (1<<3)
+@onready var sprite: Sprite3D = $Sprite3D
+@onready var shape: CollisionShape3D = $CollisionShape3D
+@onready var lifetimer: Timer = $Lifetime
+const IGNORE_LAYER: int = (1<<2) | (1<<3)
 
-const SPEED = 15
-const DMG = 50
-const LIFETIME = 20
+var SPEED: float = 15
+var DMG: float = 50
+var LIFETIME: float = 20
 
-var hit = false
-var dir = Vector3(0,0,0)
+var hit := false
+var dir := Vector3(0,0,0)
 
 func _ready():
 	lifetimer.start(LIFETIME)
@@ -31,4 +31,3 @@ func _on_body_entered(body):
 			body.get_parent().change_health(-DMG)
 	hit = true
 	queue_free()
-

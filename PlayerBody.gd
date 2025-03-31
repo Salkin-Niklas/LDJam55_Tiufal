@@ -1,15 +1,15 @@
 extends CharacterBody3D
 
 
-var PlayerRotation = Vector2(0,0)
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const SPRINT_SPEED = 4.0
-const WALLSLIDE_SPEED = 4.0
-var max_speed = 0
-var slide_dir = Vector3(0,0,0)
+var PlayerRotation: Vector2 = Vector2(0,0)
+const SPEED: float = 5.0
+const JUMP_VELOCITY: float = 4.5
+const SPRINT_SPEED: float = 4.0
+const WALLSLIDE_SPEED: float = 4.0
+var max_speed: float = 0.0
+var slide_dir: Vector3 = Vector3(0,0,0)
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	pass

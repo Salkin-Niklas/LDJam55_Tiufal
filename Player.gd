@@ -1,13 +1,13 @@
 extends Node
 
-@onready var MainCamera = $Camera_pivot/Camera_FP
-@onready var PlayerBody = $PlayerBody
-@onready var MainCameraPivot = $Camera_pivot
+@onready var MainCamera: Camera3D = $Camera_pivot/Camera_FP
+@onready var PlayerBody: CharacterBody3D = $PlayerBody
+@onready var MainCameraPivot: Node3D = $Camera_pivot
 
-@onready var magicshot_timer = $MagicShot_Timer
-@onready var chain_timer = $Chain_Timer
-@onready var stun_timer = $Stun_Timer
-@onready var slide_timer = $Slide_Timer
+@onready var magicshot_timer: Timer = $MagicShot_Timer
+@onready var chain_timer: Timer = $Chain_Timer
+@onready var stun_timer: Timer = $Stun_Timer
+@onready var slide_timer: Timer = $Slide_Timer
 
 signal health_changed(val)
 signal maxhealth_changed(val)
@@ -20,16 +20,16 @@ enum STATES{
 	STUNNED,
 	DEFAULT
 }
-var state = STATES.WALKING
+var state: STATES = STATES.WALKING
 
-const MOUSE_SENSE = 0.001
+const MOUSE_SENSE: float = 0.001
 
-var MAX_HEALTH = 100
-var health = 0
+var MAX_HEALTH: float = 100.0
+var health: float = 0.0
 
-const magicshot_cd = 0.2
-const chain_cd = 2
-const leap_cd = 5
+const magicshot_cd: float = 0.2
+const chain_cd: float = 2.0
+const leap_cd: float = 5.0
 
 
 func _ready():
@@ -42,7 +42,7 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		var MouseEvent = event.relative*MOUSE_SENSE
+		var MouseEvent: Vector2 = event.relative*MOUSE_SENSE
 		rotate_player(MouseEvent)
 
 func rotate_player(Movement: Vector2):
@@ -71,10 +71,10 @@ func _process(delta):
 		shoot_magic_shot()
 
 
-func change_camera_fov(fov):
+func change_camera_fov(fov: int):
 	MainCamera.set_perspective(clamp(fov,60,120),0.05,4000)
 
-func change_health(amount):
+func change_health(amount: float):
 	health += amount
 	if health <= 0:
 		state = STATES.DEAD
@@ -86,9 +86,9 @@ func change_health(amount):
 func shoot_magic_shot():
 	if magicshot_timer.time_left != 0:
 		return
-	var shot = preload("res://magic_shot_player.tscn").instantiate()
+	var shot: Area3D = preload("res://magic_shot_player.tscn").instantiate()
 	get_parent().add_child(shot,true)
-	var shoot_origin =  PlayerBody.global_position + Vector3(0,2.5,0)
+	var shoot_origin: Vector3 =  PlayerBody.global_position + Vector3(0,2.5,0)
 	shot.global_transform.origin = shoot_origin
 	shot.dir = -MainCamera.get_global_transform().basis.z
 	magicshot_timer.start(magicshot_cd)

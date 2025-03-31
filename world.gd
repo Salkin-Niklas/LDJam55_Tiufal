@@ -1,7 +1,7 @@
 extends Node3D
 
-@onready var Player_lifebar = $Interface/Healthbar
-@onready var Player = $Player
+@onready var Player_lifebar: Control = $Interface/Healthbar
+@onready var Player: Node = $Player
 
 signal change_health(amount)
 

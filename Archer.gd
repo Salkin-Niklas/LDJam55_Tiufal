@@ -1,8 +1,8 @@
 extends Enemy
 
 
-var target_pos = Vector3(0,0,0)
-var target_vel = Vector3(0,0,0)
+var target_pos := Vector3(0,0,0)
+var target_vel := Vector3(0,0,0)
 
 func _ready():
 	MAX_HEALTH = 50
@@ -18,10 +18,10 @@ func _process(delta):
 		return
 	attack()
 
-func update_target_pos(pos):
+func update_target_pos(pos: Vector3):
 	target_pos = pos
 
-func update_target_vel(vel):
+func update_target_vel(vel: Vector3):
 	target_vel = vel
 
 func ability():
@@ -41,12 +41,12 @@ func attack():
 		#attack_timer.start(ATTACK_CD)
 		
 		target_vel.y = 0
-		var arrow = preload("res://arrow.tscn").instantiate()
+		var arrow: Area3D = preload("res://arrow.tscn").instantiate()
 		get_parent().add_child(arrow,true)
-		var shoot_origin =  global_position + Vector3(0,1.5,0)
+		var shoot_origin: Vector3 =  global_position + Vector3(0,1.5,0)
 		arrow.global_transform.origin = shoot_origin
-		var distance = (target_pos+target_vel - arrow.global_position).length()
-		var shoot_dir = ((Vector3(0,2,0)+target_pos+target_vel*distance/arrow.SPEED)-arrow.global_position).normalized()
+		var distance: float = (target_pos+target_vel - arrow.global_position).length()
+		var shoot_dir: Vector3 = ((Vector3(0,2,0)+target_pos+target_vel*distance/arrow.SPEED)-arrow.global_position).normalized()
 		# fuck this rotation shit
 		arrow.look_at(shoot_origin + shoot_dir, Vector3.UP)
 		arrow.dir = ((Vector3(0,2,0)+target_pos+target_vel*distance/arrow.SPEED)-arrow.global_position).normalized()
